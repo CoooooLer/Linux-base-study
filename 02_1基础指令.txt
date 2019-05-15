@@ -116,4 +116,6 @@ cat
 	例如： #cat /home/linux1 /home/linux2 /home/linux2 > all.txt
 
 
+		
+
 
