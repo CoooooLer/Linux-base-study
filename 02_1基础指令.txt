@@ -37,6 +37,83 @@ cd
 	切换的方式： #cd ~
 
 mkdir (make directory,创建目录)
-	语法： #mkdir 路径
+	语法1： #mkdir 路径
 	路径： 可以是文件夹名称，也可以是包含名称的一个完整路径
+
+	语法2： #mkdir -p 路径
+	含义： 当需要一次性创建多层不存在的目录时，需要添加 -p 参数
+	例如： #mkdir -p /root/a/b/c/d
+
+	语法3： #mkdir 路径1 路径2 路径3 ...
+	含义： 一次性创建多个文件夹
+	例如： #mkdir a b c d
+
+touch
+	作用： 创建文件
+	语法： touch 文件路径(可以是文件名也可以是路径)
+	例子： touch linux.txt
+			touch linux2.txt linux3.txt (同时创建多个文件)
+			touch /home/txt/linux.txt  (指定文件夹下创建文件)
+
+cp  （copy， 复制）
+	用法： #cp 被复制的文档路径  文档保存的路径
+	例如： #cp linux.txt /home/linux.txt
+			#cp linux.txt /home/linuxxxx.txt （可以更改新文档的名字）
+			#cp -r /linux/ /home/linux  (复制文件夹及其文件， -r 指递归)
+
+mv  （move,移动、剪切）
+	用法： #mv 需要移动的文档路径  保存文档的新路径
+	例如：	#mv /linux /home
+
+	注意： 在linux中重命名也是mv，语法和移动语法一样
+	例如： #mv /linux /linux111
+
+rm	 (remove,移动、删除)
+	语法： #rm 选项 需要移除的文档路径
+	选项：
+		-f: force,强制删除
+		-r： recursion, 递归
+	例如： 删除一个文件
+		#rm linux.txt
+		在删除的时候，如果不带选线，会提示是否删除，如果需要删除则输入 "y/yes" ,否则输入 "n/no" 按下回车
+		如果在删除的时候不想频繁的确认，在可以在指令中添加选项 "-f" ，表示force(强制)。
+		#rm -f linux.txt
+
+		#rm -rf /home  (强制删除home文件夹下的所有文件)
+		#rm -rf a b c (删除多个文件)
+
+	案例： 删除以linux开头的所有文件
+		#rm -f linux*
+		* 称之为通配符，表示任意的字符。
+
+
+vim 	(一款文本编辑器)
+	语法： vim 文件路径
+	作用： 打开一个文件（可以存在，也可以不存在）
+	退出打开的文件夹：在没有按下其他命令的其他情况下，按下shift+英文冒号，输入q，按下回车即可。
+
+输出重定向
+	一般命令的输出都会显示在终端，有些时候需要将一些命令执行的结果保存到文件中进行后续的分析、统计，就需要用到输出重定向技术。
+
+	>: 覆盖输出，会覆盖原来的文件内容。
+	>>: 追加输出，不会覆盖原始文件的内容，会在原始文件内容末尾继续添加.
+
+	语法： #正常执行的指令 >/>> 文件的路径
+	案例： 使用覆盖重定向，保存 ls-la 的执行结果， 保存到当前目录下的ls.txt
+	#ls -la > ls.txt
+	vim ls.txt 
+
+	案例： 使用追加重定向，保存 ls-la 的执行结果到 ls.txt 中
+	#ls -la >> ls.txt
+
+cat 
+	作用1： cat 有直接打开一个文件的功能
+	语法1： #cat 文件的路径
+		cat linux.txt
+
+	作用2： cat还可以对文件进行合并
+	语法2： #cat 待合并的文件路径1 待合并的文件2... 文件路径n > 合并之后的文件路径
+	例如： #cat /home/linux1 /home/linux2 /home/linux2 > all.txt
+
+
 
