@@ -1,0 +1,129 @@
+hostname
+	作用：操作服务器的主机名（读取、设置）
+	语法1：#hostname      (输出完整的主机名)
+	语法2：#hostname -f		（输出当前主机名中的FQDN：全限定域名）
+
+id 
+	作用：查看一个用户的一些基本信息（包含用户id，用户组id，附加组id...）,该指令如果不指定用户则默认当前用户。
+
+	语法1: #id
+	语法2： #id 用户名
+	例如：#id root
+
+	验证用户信息：通过文件 /etc/passwd
+	验证用户组信息：通过文件 /etc/group
+
+whoami
+	作用：显示当前登录的用户名,一般用于shell脚本，用于获取当前操作的用户名方便记录日志。
+	语法： whoami
+
+ps -ef (重要)
+	作用：查看服务器的进程信息
+		-e: 等价于"-A",表示列出全部的进程
+		-f: 显示全部的列(显示全字段)
+	执行ps -ef 列的含义：
+		UID：改进程执行的用户ID
+*		PID：进程id
+*		PPID：该进程的父级进程id，如果一个程序的父级进程找不到，改程序的进程称之为僵尸进程
+*		C：cpu的占用率，其形式是百分数
+		STIM：进程的启动时间
+		TTY： 终端设备，发起该进程的设备识别符号，如果显示"?",则表示该进程并不是由终端设备发起
+		TIME：进程的执行时间
+		CMD：该进程的名称或者相对应的路径
+
+	案例：在ps的结果中过滤出想要查看的进程状态
+	#ps -ef|grep 进程名称
+	#ps -ef|grep gnome-panel
+
+top 		（重要）
+	作用： 查看服务器的进程占的资源
+	语法：
+		#top     (动态显示)
+		退出命令： 按下q键
+	执行#top结果各列的含义：
+		PID：进程id
+		USER：该进程对应的用户
+		PR： 优先级
+		VIRT： 虚拟内存
+		RES： 常驻内存
+		SHR： 共享内存
+			计算一个进程实际使用的内存 = 常驻内存（RES） - 共享内存（SHR）
+		S: 表示进程的状态（sleeping，其中S表示睡眠，R表示运行）
+		%CPU：表示CPU的占用百分比
+		%MEM：表示内存的占用百分比
+		TIME+: 执行的时间
+		COMMAND： 进程的名称或者路径
+
+		在运行top的时候，可以按下快捷键：
+		M ： 表示将就过按照内存（MEM）从高到低进行降序排列
+		P : 表示将结果按照CPU使用率从高到低进行降序排列
+		1： 当服务器拥有多个CPU的时候可以使用“1”快捷键来切换是否展示显示各个信息
+
+du -sh
+	作用：查看目录的真实大小
+	语法： #du -sh 目录路径
+	选项含义：
+		-s: summaries, 只显示汇总的大小
+		-h: 表示以高可读性的形式进行显示
+	案例：查看etc目录实际大小
+		#du -sh /etc/
+
+find 
+	作用：用于查找文件（其参数有55个）
+	语法：#find 路径范围 选项 选项的值
+	选项：
+		-name: 按照文档名称进行搜索（支持模糊搜索）
+		-type: 按照文档的类型进行搜索
+			文档类型： "-"表示文件（在使用find的时候需要用f来替换），"d"表示文件夹
+	案例：使用find在跟目录下搜索httpd.conf
+		#find / -name httpd.conf
+	案例: 搜索etc目录下所有带conf后缀的文件，并统计个数。
+		#find /etc -name *.conf | wc -l
+	案例：搜索etc目录下的所有文件
+		#find /etc -type f
+	案例：搜索etc目录下的所有文件夹
+		#find /etc -type d
+
+service   	(重要)
+	作用:用于控制一些软件的服务启动/停止/重启
+	语法： #service 服务名 start/stop/restart
+	案例：启动本机安装的Apache（网站服务软件），其服务名为httpd
+		#service httpd start
+
+kill 		(重要)
+	作用：杀死进程  	（当遇到僵尸进程或者出于某些原因需要关闭进程的时候）
+	语法： #kill 进程pid		（语法需要配合ps一起使用）
+	案例：kil掉Apache的进程
+		#service httpd start
+		#ps -ef| grep httpd
+		#kill 3291
+		#ps -ef|grep httpd
+
+	与kill命令作用相似，但是比kill更加好用的杀死进程的命令：killall
+	语法： #killall 进程名称
+		#service httpd start
+		#killall httpd
+		#ps -ef|grep httpd
+
+ifconfig		(重要)
+	作用：用于操作网卡的相关命令
+	简单语法：#ifconfig  (获取网卡相关信息)
+		inet addr 就是网卡的ip地址
+
+reboot
+	作用:重新启动计算机
+	语法1：#reboot		重启
+	语法2：#reboot -w 		模拟重启，但是不重启（写入开机与关机的日志信息）
+
+shutdown
+	作用：关机     （慎用）
+	语法1：#shutdown -h now "提示信息"   或者  #shutdown -h 6:00 "关机提示"
+	案例：设置linux系统在12:00 关机
+		#shutdown -h 12:00 "系统将在12:00关机，请保存好数据！"
+	如果要取消关机计划，按照以下方式操作：
+	centos7.X之前的版本： ctrl+c
+	centos7.x之后的版本： #shutdown -c
+	其他的关机命令：
+		#init 0
+		#halt
+		#poweroff
