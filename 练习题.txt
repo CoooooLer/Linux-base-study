@@ -1,0 +1,34 @@
+1、重启linux操作系统
+	#reboot
+2、在命令行中删除光标前/后的内容
+	前：Ctrl+u  	后：Ctrl+k
+3、删除/tmp目录下所有A开头的文件
+	#rm -f /tmp/A*
+4、系统重要文件备份，把/etc/passwd备份到/tmp目录下
+	#cp /etc/passwd /tmp/
+5、查看系统最后创建的3个用户
+	#tail -3 /etc/passwd
+6、统计当前系统中一共有多少账户
+	#wc -l /etc/passwd       
+	#cat /etc/passwd |wc -l
+7、创建/tmp/test.conf文件
+	#touch /tmp/test.conf
+8、通过vim编辑打开/tmp/test.conf
+	#vim /tmp/test.conf
+9、查看/etc/passwd的头3行和尾3行
+	#head -3 /etc/passwd
+	#tail -3 /etc/passwd
+10、一次性创建目录/text/1/2/3/4
+	#mkdir -p /text/1/2/3/4
+11、最快返回到当前账户的家目录
+	#cd ~
+	#cd
+12、查看/etc所占磁盘空间
+	#du -sh /etc
+13、删除/tmp目录下的所有文件
+	#rm -rf /tmp/*
+14、启动Apache服务，并检查是否启动成功
+	#service httpd start
+	#ps -ef|grep httpd
+15、杀死Apache进程
+	#killall httpd
