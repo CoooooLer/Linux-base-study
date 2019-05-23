@@ -1,0 +1,27 @@
+ssh（secure shell，安全外壳协议），该协议有2个常用的作用：远程连接协议、远程文件传输协议。
+
+	协议使用端口号： 默认是22，可以被修改，修改ssh服务的配置文件：
+		#etc/ssh/ssh_config
+
+		修改端口号注意事项：
+			1、端口范围是从0-65535
+			2、不能使用别的服务已经占用的端口号
+
+	服务启动/停止、重启
+		#service sshd start/stop/restart
+
+		#/etc/init.d/sshd start/stop/restart
+
+
+远程终端：
+	终端工具主要帮助运维人员连接远程的服务器，常见终端工具有：Xshell、secureCRT、Putty
+
+	1、获取服务器ip地址，可以通过ifconfig命令进行查看
+		#ifconfig
+
+	2、打开putty，输入相关的信息
+
+
+
+SSH服务文件传输
+	安装客户端：fillzilla软件

@@ -1,0 +1,29 @@
+网卡配置文件位置： /etc/sysconfig/network-scripts
+	在目录中网卡的配置文件命名格式： ifcfg-网卡名称
+	#cat /etc/sysconfig/network-scripts/ifcfg-eth0
+		ONBOOT: 是否开机启动
+		BOOTPROTO: IP地址分配方式，DHCP表示动态主机分配协议
+		HWADDR： 硬件地址，MAC地址
+
+		重启网卡1：
+			#service network restart
+
+		重启网卡2：
+			共性的目录： /etc/init.d     这个目录中放着很多服务的快捷方式
+			#/etc/init.d/network restart
+	
+	扩展：如果修改网卡的目录地址很深，可以在浅层次目录创建快捷方式。
+		#ln -s 原始文件的路径 快捷方式的路径
+		例子： #ln -s /etc/sysconfig/network-scripts/ifcfg-eth0 ~/ifcfg-eth
+
+
+
+	扩展2：重启单个网卡
+		停止某个网卡： #ifdown 网卡名
+		开启某个网卡： #ifup 网卡名
+		例如：需要停止-启动（重启）eth0网卡，则输入
+			#ifdown eth0
+			#ifup eth0
+
+
+	注意：不要随意禁用网卡
