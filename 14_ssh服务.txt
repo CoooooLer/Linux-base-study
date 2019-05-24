@@ -25,3 +25,16 @@ ssh（secure shell，安全外壳协议），该协议有2个常用的作用：�
 
 SSH服务文件传输
 	安装客户端：fillzilla软件
+
+
+扩展：通过命令行工具来传输文件/文件夹
+	工具：PSCP.exe(必须通过cmd命令行打开)，为了使用方便可以将其放到环境变量目录中，也可以直接放到C：/windows目录下即可。
+
+	用法：
+		1、 pscp 选项 用户名@linux主机地址：资源路径 windows本地的地址 （下载到win）
+		案例：pscp -r root@192.168.29.128:/root C:/download
+
+		2、 pscp 选项 资源路径 用户民@linux主机地址：远程路径	（上传到linux）
+		案例： pscp -r E:\linux-study root@192.168.29.128:/root/test
+
+		3、 pscp 选项 -ls 用户名@linux主机地址 	（列出远程路径下结构）

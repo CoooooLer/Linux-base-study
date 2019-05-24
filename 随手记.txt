@@ -1,4 +1,4 @@
-关机的几种方式：
+﻿关机的几种方式：
 	shutdown -h now	(正常关机)
 	halt	(关闭内存)
 	init 0
